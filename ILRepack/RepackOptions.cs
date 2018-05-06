@@ -49,7 +49,7 @@ namespace ILRepacking
                 }
             }
         }
-
+        public string ClassModPrefix { get; set; }
         public int FileAlignment { get; set; } // UNIMPL, not supported by cecil
         public string[] InputAssemblies { get; set; }
         public bool Internalize { get; set; }
@@ -148,6 +148,7 @@ namespace ILRepacking
             AllowDuplicateResources = cmd.Modifier("allowduplicateresources");
             foreach (string dupType in cmd.Options("allowdup"))
                 AllowDuplicateType(dupType);
+            ClassModPrefix = cmd.Option("classmod");
             AllowMultipleAssemblyLevelAttributes = cmd.Modifier("allowmultiple");
             AllowWildCards = cmd.Modifier("wildcards");
             AllowZeroPeKind = cmd.Modifier("zeropekind");

@@ -77,8 +77,10 @@ namespace ILRepacking
             Console.WriteLine(@" - /align             - NOT IMPLEMENTED");
             Console.WriteLine(@" - /closed            - NOT IMPLEMENTED");
 
+            Console.WriteLine(@" - /classmod:Prefix   classes named with Prefix act as partial complements of base class");
+
             Console.WriteLine(@" - /repackdrop:RepackDropAttribute allows dropping members denoted by this attribute name when merging");
-            Console.WriteLine(@" - /allowdup:Type     allows the specified type for being duplicated in input assemblies");
+            Console.WriteLine(@" - /allowdup:Type     allows the specified type for being duplicated in input assemblies (* for all)");
             Console.WriteLine(@" - /allowduplicateresources allows to duplicate resources in output assembly (by default they're ignored)");
             Console.WriteLine(@" - /zeropekind        allows assemblies with Zero PeKind (but obviously only IL will get merged)");
             Console.WriteLine(@" - /wildcards         allows (and resolves) file wildcards (e.g. *.dll) in input assemblies");
