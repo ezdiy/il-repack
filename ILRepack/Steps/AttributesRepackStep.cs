@@ -85,7 +85,7 @@ namespace ILRepacking.Steps
             CleanupAttributes(typeof(SecurityTransparentAttribute).FullName, _ => true);
             CleanupAttributes(typeof(SecurityCriticalAttribute).FullName, x => x.ConstructorArguments.Count == 0);
             CleanupAttributes(typeof(AllowPartiallyTrustedCallersAttribute).FullName, x => x.ConstructorArguments.Count == 0);
-            CleanupAttributes(typeof(SecurityRulesAttribute).FullName, x => x.ConstructorArguments.Count == 0);
+//            CleanupAttributes(typeof(SecurityRulesAttribute).FullName, x => x.ConstructorArguments.Count == 0);
         }
 
         private void RemoveAttributes()

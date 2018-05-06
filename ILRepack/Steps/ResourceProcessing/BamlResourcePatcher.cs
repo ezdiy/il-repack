@@ -47,9 +47,13 @@ namespace ILRepacking.Steps.ResourceProcessing
         {
             BamlDocument bamlDocument = BamlUtils.FromResourceBytes(resource.data);
 
-            foreach (dynamic node in bamlDocument)
+            foreach (BamlRecord node in bamlDocument)
             {
-                ProcessRecord(node, containingAssembly);
+                ProcessRecord(node as PropertyWithConverterRecord, containingAssembly);
+                ProcessRecord(node as TextWithConverterRecord, containingAssembly);
+                ProcessRecord(node as AssemblyInfoRecord, containingAssembly);
+                ProcessRecord(node as XmlnsPropertyRecord, containingAssembly);
+                ProcessRecord(node as TypeInfoRecord, containingAssembly);
             }
 
             //TODO: diminishing return optimisation: remove duplications + update assembly ids
@@ -59,6 +63,7 @@ namespace ILRepacking.Steps.ResourceProcessing
 
         private void ProcessRecord(PropertyWithConverterRecord record, AssemblyDefinition containingAssembly)
         {
+            if (record == null) return;
             record.Value = XamlResourcePathPatcherStep.PatchPath(
                 record.Value,
                 _mainAssembly,
@@ -68,6 +73,7 @@ namespace ILRepacking.Steps.ResourceProcessing
 
         private void ProcessRecord(TextWithConverterRecord record, AssemblyDefinition containingAssembly)
         {
+            if (record == null) return;
             record.Value = XamlResourcePathPatcherStep.PatchPath(
                 record.Value,
                 _mainAssembly,
@@ -77,6 +83,7 @@ namespace ILRepacking.Steps.ResourceProcessing
 
         private void ProcessRecord(AssemblyInfoRecord record, AssemblyDefinition containingAssembly)
         {
+            if (record == null) return;
             var assemblyName = new System.Reflection.AssemblyName(record.AssemblyFullName);
 
             var isMergedAssembly = _otherAssemblies.FirstOrDefault(
@@ -94,6 +101,7 @@ namespace ILRepacking.Steps.ResourceProcessing
 
         private void ProcessRecord(XmlnsPropertyRecord record, AssemblyDefinition containingAssembly)
         {
+            if (record == null) return;
             string xmlNamespace = record.XmlNamespace;
             const string AssemblyDef = "assembly=";
             int assemblyStart = xmlNamespace.IndexOf(AssemblyDef, StringComparison.Ordinal);
@@ -111,6 +119,7 @@ namespace ILRepacking.Steps.ResourceProcessing
 
         private void ProcessRecord(TypeInfoRecord record, AssemblyDefinition containingAssembly)
         {
+            if (record == null) return;
             record.TypeFullName = RemoveTypeAssemblyInformation(record.TypeFullName);
         }
 

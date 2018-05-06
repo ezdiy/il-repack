@@ -97,7 +97,7 @@ namespace ILRepacking.Steps.SourceServerData
 
         public override string ToString()
         {
-            return string.Join(Environment.NewLine, GetRawLines());
+            return string.Join(Environment.NewLine, GetRawLines().ToArray());
         }
 
         private IEnumerable<string> GetRawLines()

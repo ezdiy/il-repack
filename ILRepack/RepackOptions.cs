@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Compat;
 
 namespace ILRepacking
 {
@@ -230,7 +231,7 @@ namespace ILRepacking
             if (cmd.HasOption("repackdrop"))
             {
                 RepackDropAttribute = cmd.Option("repackdrop");
-                if (String.IsNullOrWhiteSpace(RepackDropAttribute))
+                if (RepackDropAttribute.IsNullOrWhiteSpace())
                 {
                     RepackDropAttribute = "RepackDropAttribute";
                 }
